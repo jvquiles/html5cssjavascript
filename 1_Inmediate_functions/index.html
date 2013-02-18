@@ -1,0 +1,17 @@
+<html>
+	<head>
+		<script type="text/javascript" src="./js/jquery-1.9.1.js"></script>
+		<script type="text/javascript">
+			// Example of self-executing function
+			$(document).ready(function(){
+				var i = (function(a, b){
+						return a + b;
+						})(1, 2);
+				alert(i);
+			});
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>
