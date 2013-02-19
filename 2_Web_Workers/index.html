@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<script type="text/javascript" src="./js/jquery-1.9.1.js"></script>
+		<script type="text/javascript" src="./js/MyWorker.js"></script>
+		<script>
+			var contador = 0;
+			var worker = new Worker('./js/MyWorker.js');
+			worker.addEventListener('message', function(e){
+				var contador = e.data.contador;
+				document.getElementById('idLabel').textContent = contador;
+			}, false);
+			function EmpezarContador(){
+				worker.postMessage({'contador':document.getElementById('idLabel').textContent});
+			}			
+		</script>
+	</head>
+	<body>
+		<Input type="Button" onClick="EmpezarContador()"; value="Start Counting"></Input>
+		<p id="idLabel"></p>
+	</body>
+</html>
