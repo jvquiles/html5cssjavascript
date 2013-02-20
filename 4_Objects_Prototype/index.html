@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<script type="text/javascript">
+			function Clase(){ 
+				//Inicializo las propiedades y métodos 
+				this.Propiedad = "Soy padre"
+				this.OtraPropiedad = "Soy yo"
+				this.Metodo = function (){}
+			}
+			
+			Clase.prototype.OtraFuncion = function (){};
+			
+			var MiClase = new Clase();
+			MiClase.Magia = true;
+			MiClase.OtraFuncion();
+			
+			function ClaseHeredada(){
+				this.Propiedad = "Soy heredero"
+			}
+			
+			ClaseHeredada.prototype = new Clase();
+			ClaseHeredada.prototype.constructor = ClaseHeredada;
+			
+			var a = new Clase();
+			console.log(a.Propiedad);
+			console.log(a.OtraPropiedad);
+			var b = new ClaseHeredada();
+			console.log(b.Propiedad);
+			console.log(b.OtraPropiedad);
+		</script>
+	</head>
+</html>
