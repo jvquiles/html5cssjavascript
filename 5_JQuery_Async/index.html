@@ -1,0 +1,144 @@
+<html>
+	<head>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js" charset="utf-8"></script>		
+		<script>
+			// load
+			$('#idResultLoad').load('/ #idLoad');
+
+			//get
+			$.get('get.html', function(data) {
+				$('#idResultGet').html(data);
+			});
+
+			//post
+			$.post('post.html', function(data) {
+				$('#idResultPost').html(data);
+			});
+
+			//getJSON
+			$.getJSON('getjson.html', function(data) {
+				var items = [];
+				$.each(data, function(key, val) {
+					items.push('<li id="' + key + '">' + val + '</li>');
+				});
+			 
+				$('<ul/>', {html: items.join('')}).appendTo('#idResultGetJson');
+			});
+			
+			//ajax options
+				//accepts:			X
+				//async:			X
+				//beforeSend:		X
+				//cache:			X
+				//complete:			X
+				//contents:			?
+				//contentType:		X
+				//context:			X
+				//converters:		?
+				//crossDomain:		X
+				//data:				X
+				//dataFilter:		X
+				//dataType:			X
+				//error:			X
+				//global:			X
+				//headers:			X
+				//ifModified:		X
+				//isLocal:			X
+				//jsonp:			?
+				//jsonpCallback:	X
+				//mimeType:			?
+				//password:			X
+				//processData:		X
+				//scriptCharset:	?
+				//statusCode:		X
+				//success:			X
+				//timeout:			X
+				//traditional:		X
+				//type:				X
+				//url:				X
+				//username:			X
+				//xhr:				X
+				//xhrFields:		X
+				
+			// ajax
+			$(document).ready(function(){
+				$("button").click(function(){
+					$.ajax({
+						accepts: "text/plain",
+						async:false,
+						beforeSend: function(){
+							$('#idResultAjax').html(" 1:Before send function");
+						},
+						cache:false,
+						complete: function(){
+							$('#idResultAjax').html($('#idResultAjax').html() + " 6:After complete function");
+						},
+						contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+						context: {value:'some context value'},
+						crossDomain: true,
+						data:{datatosend:'some data'},
+						dataFilter: function (response, type) {
+							$('#idResultAjax').html($('#idResultAjax').html() + " 2:Filtered Data:" + response + " 3:" + type);
+						},
+						dataType: "text",
+						error: function (xhr, ajaxOptions, thrownError) {
+							$('#idResultAjax').html($('#idResultAjax').html() + " 2:Ocurred an Error:" + xhr.status + " 3:" + thrownError);
+						},
+						global: true,
+						headers: {
+							"My-Fierst-Header":"first value",
+							"My-Second-Header":"second value"
+						},
+						ifModified: false,
+						isLocal: true,
+						jsonpCallback : "handleJSON",
+						password: "",
+						processData: true,
+						statusCode: {
+							200: function(){
+								$('#idResultAjax').html($('#idResultAjax').html() + " 8: 200,Everything worked fine");
+							},
+							404: function(){
+								$('#idResultAjax').html($('#idResultAjax').html() + " 8: 404,Not found");
+							}
+						},
+						success: function(){
+							$('#idResultAjax').html($('#idResultAjax').html() + " 4:" + this.value);
+						},
+						timeout:10000,
+						traditional: true,
+						type: "GET",
+						url: "ajax.txt",
+						username: "",
+						xhr: function(){
+							var xhr = jQuery.ajaxSettings.xhr();
+							if(xhr instanceof window.XMLHttpRequest) {
+								xhr.addEventListener('progress', function(){$('#idResultAjax').html($('#idResultAjax').html() + " 9: Has progress")}, false);
+								xhr.addEventListener('load', function(){$('#idResultAjax').html($('#idResultAjax').html() + " 9: Has Loaded")}, false);
+								xhr.addEventListener('abort', function(){$('#idResultAjax').html($('#idResultAjax').html() + " 9: Has aborted")}, false);
+							}
+							return xhr;
+						},
+						xhrFields: {
+							withCredentials: true
+						}
+					});
+				})
+			});
+			
+			function handleJSON(){
+				$('#idResultAjax').html($('#idResultAjax').html() + " 7:" + "Handled JSON" );
+			}
+						
+		</script>
+	</head>
+	<body>
+		<div id="idResultLoad"></div>
+		<p id="idLoad">Se ha cargado en load</p>
+		<div id="idResultGet"></div>
+		<div id="idResultPost"></div>
+		<div id="idResultGetJson"></div>
+		<button>Change Content</button>
+		<div id="idResultAjax"></div>
+	</body>
+</html>
