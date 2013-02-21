@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<!-- JQuery references -->
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+		<script>
+			var contador = 0;
+			
+			var xmlhttp=new XMLHttpRequest();
+			xmlhttp.open("GET","despeinao.png",true);
+			xmlhttp.onprogress = function(evt){
+				contador = (evt.loaded / evt.total)*100;  
+				$('#progressbar').progressbar( {value: contador} );				
+			};
+			xmlhttp.onload = function(){
+				contador = 100;
+				$("#progressbar").progressbar({value: contador});
+			};
+			function Empezar(){
+				contador = 5;
+				$("#progressbar").progressbar({value: contador});
+				xmlhttp.send();
+			}			
+		</script>
+	</head>
+	<body>
+		<div id="progressbar"></div>
+		<input type="button" value="Empecemos" onClick="Empezar()"></input>		
+	</body>
+</html>
