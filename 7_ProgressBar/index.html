@@ -1,0 +1,66 @@
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		
+		<!-- JQuery references -->
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+		<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+		
+	    <!-- WinJS references -->
+		<link href="//Microsoft.WinJS.1.0/css/ui-light.css" rel="stylesheet" />
+		<script src="//Microsoft.WinJS.1.0/js/base.js"></script>
+		<script src="//Microsoft.WinJS.1.0/js/ui.js"></script>
+		<link href="progressbar.css" rel="stylesheet" />
+		<script src="progressbar.js"></script>
+		
+		<script>
+			var contador = 0;
+			
+			$("document").ready(function(){
+				$("#progressbar").progressbar({value: contador});
+			});
+			
+			function SubirBarrita(){
+				contador += 5;
+				$("#progressbar").progressbar({value: contador});
+			}
+		</script>
+	</head>
+	<body>
+	 
+	<div id="progressbar"></div>
+	 
+	<Input type="button" id="idBoton" onClick="SubirBarrita()"; value="Sube la barrita"></Input>
+	 
+	<div class="progressbar fragment">
+        <header aria-label="Header content" role="banner">
+            <button class="win-backbutton" aria-label="Back" disabled type="button"></button>
+            <h1 class="titlearea win-type-ellipsis">
+                <span class="pagetitle">Progress Bar</span>
+            </h1>
+        </header>
+        <section aria-label="Main content" role="main" class="swiper">
+            <div id="indeterminate">
+                <h2>Indeterminate</h2>
+                <div class="explanation">Use an indeterminate progress bar or ring to indicate that a task is running when you can't be sure when it will finish.</div>
+                <h3>Bar</h3>
+                <progress></progress>
+                
+                <h3>Ring</h3>
+                <progress class="win-ring"></progress>
+
+                <h3>Ring with text</h3>
+                <label class="progressRingText"><progress class="win-ring withText"></progress> Working</label>
+            </div>
+            <div id="determinate">
+                <h2>Determinate</h2>
+                <div class="explanation">Use a determinate progress bar when you are able to know when the task will finish.</div>
+                <div><progress value="0" max="100"></progress></div>
+                <div><button id="advance">Advance</button><button id="reset">Reset</button></div>
+            </div>
+        </section>
+    </div>
+	 
+	</body>
+</html>
